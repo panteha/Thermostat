@@ -52,5 +52,6 @@ var Thermostat = function() {
     } else {
       this.energyUsage = 'high-usage';
     }
+    return this.energyUsage;
   };
 };
