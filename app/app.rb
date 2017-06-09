@@ -9,6 +9,8 @@ class Thermostat < Sinatra::Base
 
      enable :sessions
 
+     result = []
+
    before do
      response.headers['Access-Control-Allow-Origin'] = '*'
    end
@@ -16,14 +18,22 @@ class Thermostat < Sinatra::Base
    get '/' do
     #  redirect '/temperature'
     'Welcome!'
+    # p '1', session[:temp]
+    #  session[:temp] = 23.to_json
+
    end
 
    get '/temperature' do
-     23.to_json
+    #   p '2', session[:temp]
+    #  session[:temp]
+    23.to_json
    end
 
-   post '/' do
-     param[temp]
+   post '/temperature' do
+      result << JSON.parse(params[:saved_temperature])
+      # p session[:temp]
+      p result
+      redirect 'temperature'
    end
 
 

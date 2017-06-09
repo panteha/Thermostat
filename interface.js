@@ -1,15 +1,17 @@
 $(document).ready(function(){
   var thermostat = new Thermostat();
+  var city = $('#current-city').val();
   updateTemperature();
   updatePowerSavingMode();
   updateEnergyUsage();
-  displayWeather("London");
+  displayWeather(city);
   getTemperature();
 
   $('#up-button').click(function(){
     thermostat.up();
     updateTemperature();
     updateEnergyUsage();
+    setTemperature();
   });
 
   $('#down-button').click(function() {
@@ -62,15 +64,24 @@ $(document).ready(function(){
     });
   }
 
-
   function getTemperature() {
+    // $.get('http://localhost:9292/', function(data) {
+    //   $('#temperature').text(data);
+    // });
     var url = 'http://localhost:9292/temperature';
     $.get(url, function(data) {
       $('#temperature').text(data);
+      thermostat.setCurrentTemperature(data);
+      updateTemperature();
       // debugger;
     });
   }
 
+
+  function setTemperature(){
+    var url = 'http://localhost:9292/temperature'
+    $.post(url, {saved_temperature: thermostat.temperature});
+}
 
 
 });

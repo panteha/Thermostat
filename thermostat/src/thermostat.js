@@ -11,10 +11,6 @@ var Thermostat = function() {
   this.powerSavingMode = true;
   this.energyUsage = 'medium-usage';
 
- Thermostat.prototype.setCurrentTemperature = function(temp){
-   this.temperature = temp;
- }
-
   Thermostat.prototype.up = function() {
     if(this.temperature < this.maximum) {
       this.temperature++;
