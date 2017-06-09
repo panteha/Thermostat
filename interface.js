@@ -4,6 +4,7 @@ $(document).ready(function(){
   updatePowerSavingMode();
   updateEnergyUsage();
   displayWeather("London");
+  getTemperature();
 
   $('#up-button').click(function(){
     thermostat.up();
@@ -60,5 +61,16 @@ $(document).ready(function(){
       $('#current-city-temperature').text(data.main.temp);
     });
   }
+
+
+  function getTemperature() {
+    var url = 'http://localhost:9292/temperature';
+    $.get(url, function(data) {
+      $('#temperature').text(data);
+      // debugger;
+    });
+  }
+
+
 
 });
